@@ -18,10 +18,14 @@ User views the bucket list.
 
 How to run the application
 		- You need git installed on your computer.
-		- Download also Ruby installer http://rubyinstaller.org/downloads  and install it. I have worked with version 2.3.3 (x64). 
+
+		- Download also Ruby installer http://rubyinstaller.org/downloads  
+			and install it. I have worked with version 2.3.3 (x64). 
 			make sure to add the application to your path.
 
-			You should now be able to install sass from your terminal or command line by typing      gem install sass
+			You should now be able to install sass from your terminal or command line by typing     
+
+						 gem install sass
 
 
 1. using the command prompt or terminal make a directory for the project  MKDIR CHALLENGEONE
