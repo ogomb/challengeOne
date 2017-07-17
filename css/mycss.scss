@@ -1,3 +1,11 @@
+.navbar-brand,
+.navbar-nav li a {
+    line-height: 50px;
+    height: 60px;
+    padding-top: 0;
+    font-size: 1.4em !important;
+}
+
 body{
     font-family: 'Josefin Slab';
 }
@@ -8,12 +16,19 @@ body{
 
     
 }
+#bgimg2 {
+    background-image: url('../images/cool2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    
+}
 #moving_text{
     font-size: 68px;
 }
 .typewrite {
     text-align: center;
-    color: green;
+    color: white;
     font-size: 70px;
     text-decoration: none;
 }
@@ -68,10 +83,7 @@ body{
     border-top-left-radius: 0;
     border-top-right-radius: 0;
 }
-.thumbnail {
-border-radius: 100%;
-    width: 90px;
-}
+
 
 
 #modal_wrapper.overlay::before{
@@ -98,11 +110,15 @@ border-radius: 100%;
     background: #fff;
     border: 5px solid #999;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(245,245,245, 0.7);
 }
 
 #modal_wrapper.overlay #modal_window {
     display: block;
+}
+
+#my_list_item{
+    
 }
 
 

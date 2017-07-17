@@ -10,7 +10,7 @@
      <link href="css/mycss.css" rel="stylesheet">
     
 </head>
-<body id="bgimg">
+<body id="bgimg2">
 
  <header> 
         <nav class="navbar navbar-default">
@@ -36,7 +36,11 @@
         <div class="row">
             <div class="col  col-md-offset-7">
                <button class="btn btn-success" id="modal_open">Create bucketlist</button>
-               
+               <button class="btn btn-success" id="modal_open">Delete bucketlist</button>
+               <button class="btn btn-success" id="modal_open">Add items </button>
+               <button class="btn btn-success" id="modal_open">Edit items </button>
+
+                           
                 
                     <div id="modal_wrapper">
                         <div id="modal_window">
@@ -46,15 +50,7 @@
                             <p>Complete the form below to create a BucketLit:</p>
 
                                 <form class="form-signin" id="modal_feedback" method="get">
-                                    <label> Category:</label>
-                                        <select class="form-control" required name="category" id="category">
-                       
-                                                <option>Finance</option>
-                                                <option >Education</option>
-                                                <option>Travel</option>
-                                                <option selected="selected">Health</option>
-                                        </select>
-                
+                                                   
                                         <label>Description:</label>
                                         <input type="text" name="description" id="description" required class="form-control" placeholder="Be more Descriptive Like... i would like to climb Mt Everest Next Month !!">
                 
@@ -69,18 +65,21 @@
             <div class="col-md-6  col-md-offset-4">
                 
             </div>
-             <div class="col-md-6 col-md-offset-2">
+             <div class="col-md-6 col-md-offset-2" style="margin-top:40px">
                 
-           <div class="media">
+           <div class="media" id="my_list_item">
             <div class="media-right pull-left">
                 <a href="#">
-                    <img class="media-object" id="kamjeshImage">
+                    <div id="kamjeshImage"></div>
                 </a>
             </div>
                 <div class="media-body">
                     
                     <p> <strong><span id="kamjesh"></span> </strong></p>
+                    
                     <p> <i>Remember the sky is always the limit</i></p>
+                    
+                     
                 </div>
             </div>
         
