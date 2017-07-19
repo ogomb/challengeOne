@@ -37,11 +37,8 @@
             <div class="col  col-md-offset-7">
                <button class="btn btn-success" id="modal_open">Create bucketlist</button>
                <button class="btn btn-success" id="modal_open">Delete bucketlist</button>
-               <button class="btn btn-success" id="modal_open">Add items </button>
-               <button class="btn btn-success" id="modal_open">Edit items </button>
+               
 
-                           
-                
                     <div id="modal_wrapper">
                         <div id="modal_window">
 
@@ -66,7 +63,11 @@
                 
             </div>
              <div class="col-md-6 col-md-offset-2" style="margin-top:40px">
-                
+             
+             {% if users_bucketlist %}
+
+             {% for item in users_bucketlist %}
+
            <div class="media" id="my_list_item">
             <div class="media-right pull-left">
                 <a href="#">
@@ -74,14 +75,19 @@
                 </a>
             </div>
                 <div class="media-body">
-                    
-                    <p> <strong><span id="kamjesh"></span> </strong></p>
+                                   
+                    <p> <strong><span></span> </strong></p>
+
+                    {{ item }}
                     
                     <p> <i>Remember the sky is always the limit</i></p>
-                    
-                     
+                     <form method="POST" action="/bucket_list/{{loop.index}}/delete">
+                        <button class="btn btn-success" name="delete_item">Delete Item</button>
+                    </form>
                 </div>
             </div>
+            {% endfor %}
+            {% endif %}
         
     </div>
     </div>
