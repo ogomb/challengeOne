@@ -19,7 +19,7 @@
                 <a class="navbar-brand" href="#"> Bucket List</a>
             </div>
             <ul class="nav navbar-nav col-md-2 col-md-push-4">
-            <a class="navbar-brand">Hello User</a>
+            <a class="navbar-brand">Hello  {{ username }}</a>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 
@@ -34,11 +34,17 @@
     <div class="container" >
         <div id="bgimage">
         <div class="row">
+           <div class="col  col-md-offset-2">
+                {% if users_bucketlist %}
+                <form method="POST" action="/bucket_list/delete_all">
+                        <button class="btn btn-success" name="delete_item">Delete Whole BucketList</button>
+                    </form>
+                </div>
+                {% endif %}
             <div class="col  col-md-offset-7">
                <button class="btn btn-success" id="modal_open">Create bucketlist</button>
-               <button class="btn btn-success" id="modal_open">Delete bucketlist</button>
-               
-
+                
+              
                     <div id="modal_wrapper">
                         <div id="modal_window">
 
@@ -78,7 +84,7 @@
                                    
                     <p> <strong><span></span> </strong></p>
 
-                    {{ item }}
+                    <p id="text_for_item">{{ item }}</p>
                     
                     <p> <i>Remember the sky is always the limit</i></p>
                      <form method="POST" action="/bucket_list/{{loop.index}}/delete">
