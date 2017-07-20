@@ -1,5 +1,6 @@
 ////////////////////////////this is the section of the modal implementation ////////////////////
 
+
 var modal_init = function() {
 
     var modalWrapper = document.getElementById("modal_wrapper");
@@ -46,14 +47,14 @@ var modal_init = function() {
       document.attachEvent("onkeydown", keyHandler);
     }
 };
-    
-    
-      if(document.addEventListener) {
+  
+if(document.addEventListener) {
        document.addEventListener("DOMContentLoaded", modal_init, false);
   } else {
+     
        window.attachEvent("onload", modal_init);
   }
-  
+
 
 
 ////////////////////////////////////////////////////
@@ -118,9 +119,7 @@ window.onload = function(){
     css.type= "text/css";
     css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
     document.body.appendChild(css);
-    
-    
-    
+ 
 };
 
 function findparameters(parameters){
@@ -154,9 +153,8 @@ try{
     
 }catch (err){
     console.log(err);
-    document.getElementById("kamjesh").innerHTML= "<h2> <small>Let's Get Started Creating A BucketList </small></h2>";
+    
     }
-
 
 
 
