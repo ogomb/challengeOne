@@ -41,16 +41,17 @@
                     </form>
                 </div>
                 {% endif %}
+                 
             <div class="col  col-md-offset-7">
                <button class="btn btn-success" id="modal_open">Create bucketlist</button>
-                
+                 
               
                     <div id="modal_wrapper">
                         <div id="modal_window">
 
                             <div style="text-align: right;"><a id="modal_close" href="#">CLOSE</a></div>
 
-                            <p>Complete the form below to create a BucketLit:</p>
+                            <p>Complete the form below to create a BucketList:</p>
 
                                 <form class="form-signin" id="modal_feedback" method="POST">
                                                    
@@ -65,9 +66,7 @@
                 
                
             </div>
-            <div class="col-md-6  col-md-offset-4">
-                
-            </div>
+           
              <div class="col-md-6 col-md-offset-2" style="margin-top:40px">
              
              {% if users_bucketlist %}
@@ -81,17 +80,18 @@
                 </a>
             </div>
                 <div class="media-body">
-                                   
-                    <p> <strong><span></span> </strong></p>
-
+                     
                     <p id="text_for_item">{{ item }}</p>
                     
                     <p> <i>Remember the sky is always the limit</i></p>
-                     <form method="POST" action="/bucket_list/{{loop.index}}/delete">
+                     <form method="POST" action="/bucket_list/{{ item }}/delete">
                         <button class="btn btn-success" name="delete_item">Delete Item</button>
                     </form>
+                    
+                
                 </div>
             </div>
+            
             {% endfor %}
             {% endif %}
         
