@@ -7,6 +7,7 @@
 <title>BucketList</title>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Slab">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
      <link href="../static/css/mycss.css"  rel="stylesheet">
     
 </head>
@@ -62,36 +63,93 @@
             </div>
             </div>
            
-                     
 
-                       {% for big_stuff in bucket_list_items %}
-                        
-                            <div class="panel panel-default" style="width: 320px">
+                                {% for big_stuff, all_lists in bucket_list_items2.items() %}
+
+                            <div class="panel panel-default" style="width: 520px">
+                               
                             <div class="panel-heading clearfix">
-                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;">{{ big_stuff }}</h4>
+                                <h4 class="panel-title pull-left" style="padding-top: 7.5px;"> {{ big_stuff }}</h4>
+                                    
+                                      
                                     <div class="btn-group pull-right">
-                                        <a href="#" class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal">Add</a>
+                                        <a href="#my_modal" data-toggle="modal" data-book-id="{{ big_stuff }}">Add Item</a>
+                                     
+                                        <form action="/bucket_list/delete_all" method="POST">
+                                        <input type="hidden" name="bucket_name" value=" {{ big_stuff }}"/>
+                                        <input type="submit" value="Delete"/>
+                                        </form>
+
+                                     <div class="modal" id="my_modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title">Add item to bucket</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                               <form action="/bucket_list/add_item" method="GET"> 
+                                                                        <input type="text" required class="form-control" name="to_do" placeholder="Enter what you want to do">
+                                                                        <input type="hidden" name="bookId">                                              
+                                                                        <input class="btn btn-default" type="submit"/></form>
+                                            </div>
+                                                 <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+
                                     </div>
+                             
+                                    
                             </div>
                             <div class="panel-body" style="overflow-y: auto">
                                 
                                 <table class="table table-bordered">
                                         <tbody>
-                                             {% for to_do in things_to_do %}
+                                             
+                                                {% for do in all_lists %}
                                                 <tr>
-                                                <td>{{ to_do }}</td>
+                                                <td>{{ do }}</td>
                                                 <td>
-                                                    <a>
-                                                        <i class="glyphicon glyphicon-edit"></i>
-                                                    </a>
+                                                     <a class="btn btn-default" href="#edit_modal" data-toggle="modal" data-item="{{ do }}" data-dict-name="{{ big_stuff }}">
+                                                     <i class="glyphicon glyphicon-edit"></i>
+                                                     </a>
+                                                         <div class="modal" id="edit_modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title">Edit the item in bucket</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                               <form action="/bucket_list/edit_item" method="POST"> 
+                                                                        <input type="hidden" name="item"> 
+                                                                        <input type="hidden" name="dict_name">
+                                                                        <input type="text" class="form-control" name="item_to_add">                                              
+                                                                        <input class="btn btn-default" type="submit"/></form>
+                                            </div>
+                                                 <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+
                                                 </td>
                                                 <td>
-                                                    <a>
-                                                    <i class="glyphicon glyphicon-remove clickable"></i>
-                                                    </a>
+                                                    <form action="/bucket_list/delete_item" method="POST">
+                                                    <input type="hidden" name="item" value="{{ do }}">
+                                                    <input type="hidden" name="dict_name" value="{{ big_stuff }}">
+                                                        <button type="submit">
+                                                    <span class="glyphicon glyphicon-remove clickable"></span>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                                 </tr>
                                             {% endfor %}
+                                        
                                         </tbody>
                                     </table>
                                    
@@ -100,41 +158,40 @@
                                   
                             </div>
                             
-                            
-                        </div>
-                        
-                            {% endfor %}
-                          
-                 
-                    <div id="myModal" class="modal fade" role="dialog">
-                             <div class="modal-dialog">
-
-                                     <!-- Modal content-->
-                             <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Bucket List Item</h4>
-                            </div>
                            
-                            <div class="modal-body">
-                                <form action="/bucket_list/add_item" method="GET"> 
-                            <input type="text" required class="form-control" name="to_do" placeholder="Enter what you want to do">
-                            </div>
-                                                 
-                             <input class="btn btn-default" type="submit"/></form>
-                        
-                            
                         </div>
+                        
+              {% endfor %}
 
-                    </div>
-                    </div>
+
+
+
+   
+                    
+        </div>
+    </div>                           
     
     
    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+    
  <script type="text/javascript"  src="../static/js/awesome.js"></script>
-   
+ <script>
+ $('#my_modal').on('show.bs.modal', function(e) {
+    var bookId = $(e.relatedTarget).data('book-id');
+    $(e.currentTarget).find('input[name="bookId"]').val(bookId);
+ });
+
+ $('#edit_modal').on('show.bs.modal', function(e) {
+    var item = $(e.relatedTarget).data('item');
+    var dictname = $(e.relatedTarget).data('dict-name')
+    $(e.currentTarget).find('input[name="item"]').val(item);
+    $(e.currentTarget).find('input[name="dict_name"]').val(dictname);
+ });
+</script>   
+    
+ 
   
 </body>
 </html>
