@@ -1,4 +1,6 @@
+
 from flask import render_template, request, redirect, url_for
+
 
 from app import app
 
@@ -88,11 +90,12 @@ def bucket_list():
     
     if request.method == 'POST':
         description = str(request.form.get('description'))
+        description.strip()
         print description
-        print model_user.description
+        model_user.description = description
         
-        if description != model_user.description and model_user.bucket_list == []:
-            model_user.add_bucket_list_to_collection(description, model_user.bucket_list)
+        if description not in model_user.dictionary_of_lists.keys():
+            model_user.add_bucket_list_to_collection(description, [])
             buckets = model_user.dictionary_of_lists.keys()
             print buckets
             return redirect(url_for('bucket_list'))
@@ -100,36 +103,78 @@ def bucket_list():
     username = model_user.name
     print "---------"
     bucket_list_items= model_user.dictionary_of_lists.keys()
-    bucket_list_items2 = model_user.dictionary_of_lists.values()
+    bucket_list_items2 = model_user.dictionary_of_lists
+    dictionary= model_user.dictionary_of_lists
     print bucket_list_items2
-    return render_template('my_bucket.html', username=username, description=model_user.description, bucket_list_items=bucket_list_items, things_to_do=model_user.bucket_list)
+    print model_user.description
+    print dictionary
+    return render_template('my_bucket.html', username=username, description=model_user.description, bucket_list_items2=bucket_list_items2, things_to_do=bucket_list_items2)
 
 
 
-@app.route('/bucket_list/add_item', methods=['GET','POST'])
+@app.route('/bucket_list/add_item', methods=['GET'])
 def add_bucket_list_item():
     """
     Adds item to the bucket list."""
     if request.method == 'GET':
         
         alist = str(request.args.get('to_do'))
-        print model_user.bucket_list
-        print alist
-        model_user.add_item_to_bucket(alist)
+        bucket_name = str(request.args.get('bookId'))
+        print bucket_name
+        bucket = model_user.dictionary_of_lists[bucket_name]
+        bucket.append(alist)
+        
+        
+        
+        print bucket_name
         print "^^^^^^^^^^^^^^^^^^"
         
-        return redirect(url_for('bucket_list'))
+    return redirect(url_for('bucket_list'))
 
-@app.route('/bucket_list/delete_all', methods=['POST'])
+@app.route('/bucket_list/delete_all', methods=['GET','POST'])
 def delete_whole_bucket_list():
     """
     Deleting all items in the bucket list."""
-    model_user.remove_a_bucketlist_from_mydict(model_user.description)
-    return redirect(url_for('bucket_list'))
+    if request.method == 'POST':
+        alist = str(request.form.get('bucket_name'))
+        print alist + "*********************"
+        name =alist.strip()
+        print name
+        #print model_user.dictionary_of_lists[alist]
+        del model_user.dictionary_of_lists[name]
+        return redirect(url_for('bucket_list'))
 
+@app.route('/bucket_list/delete_item', methods=['GET','POST'])
+def delete_item_in_bucket():
+    """
+    Deleting all items in the bucket list."""
+    if request.method == 'POST':
+        key_of_dict = str(request.form.get('dict_name'))
+        an_item = str(request.form.get('item'))
+        model_user.dictionary_of_lists
 
+        the_list=model_user.dictionary_of_lists[key_of_dict]
+        the_list.remove(an_item)
+       
+        return redirect(url_for('bucket_list'))
         
 
-
+@app.route('/bucket_list/edit_item', methods=['GET','POST'])
+def edit_item_in_bucket():
+    """
+    Deleting all items in the bucket list."""
+    if request.method == 'POST':
+        key_of_dict = str(request.form.get('dict_name'))
+        item_to_add= str(request.form.get('item_to_add'))
+        item_to_delete= str(request.form.get('item'))
+        
+        list_to_edit = model_user.dictionary_of_lists[key_of_dict]
+        list_to_edit.remove(item_to_delete)
+        list_to_edit.append(item_to_add)
+        print item_to_add
+        print item_to_delete
+        print "_______________"
+       
+        return redirect(url_for('bucket_list'))
     
 
