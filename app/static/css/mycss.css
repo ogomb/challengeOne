@@ -117,8 +117,10 @@ body{
     display: block;
 }
 
-
-
+.panel-height {
+  height: 100px; 
+  width: 50px;
+}
 
 
 
