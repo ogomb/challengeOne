@@ -5,9 +5,8 @@ python:
   - "2.7"
   
 # command to install dependencies
-env:
-  global:
-    export PYHTONPATH="/home/travis/build/ogomb/challengeOne"
+
+
 install:
  
   - pip install -r requirements.txt
