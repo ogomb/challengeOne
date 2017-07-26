@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ogomb/challengeOne.svg?branch=master)](https://travis-ci.org/ogomb/challengeOne)  [![Coverage Status](https://coveralls.io/repos/github/ogomb/challengeOne/badge.svg?branch=master)](https://coveralls.io/github/ogomb/challengeOne?branch=master)
+[![Build Status](https://travis-ci.org/ogomb/challengeOne.svg?branch=master)](https://travis-ci.org/ogomb/challengeOne)  
 
 SYNOPSIS
 
