@@ -65,7 +65,7 @@ def signup():
             model_user.name = username
             model_user.email = email
             model_user.password = password
-            print model_user.name + "============"
+            #print model_user.name + "============"
             return redirect(url_for('login'))
     return render_template('signup.html')
 
@@ -90,23 +90,23 @@ def bucket_list():
     if request.method == 'POST':
         description = str(request.form.get('description'))
         description.strip()
-        print description
+        #print description
         model_user.description = description
         
         if description not in dict_of_bucket_list.keys():
             dict_of_bucket_list[description] = BucketList().display_list()
             buckets = dict_of_bucket_list.keys()
-            print buckets
+            #print buckets
             return redirect(url_for('bucket_list'))
      
     username = model_user.name
-    print "---------"
+    #print "---------"
     bucket_list_items= dict_of_bucket_list.keys()
     bucket_list_items2 = dict_of_bucket_list
     dictionary=dict_of_bucket_list
-    print bucket_list_items2
-    print model_user.description
-    print dictionary
+    #print bucket_list_items2
+    #print model_user.description
+    #print dictionary
     return render_template('my_bucket.html', username=username, description=model_user.description, bucket_list_items2=bucket_list_items2, things_to_do=bucket_list_items2)
 
 
@@ -119,7 +119,7 @@ def add_bucket_list_item():
         
         alist = str(request.args.get('to_do'))
         bucket_name = str(request.args.get('bookId'))
-        print bucket_name
+        #print bucket_name
         bucket = dict_of_bucket_list[bucket_name]
         bucket.append(alist)
         
@@ -132,9 +132,9 @@ def delete_whole_bucket_list():
     Deleting all items in the bucket list."""
     if request.method == 'POST':
         alist = str(request.form.get('bucket_name'))
-        print alist + "*********************"
+        #print alist + "*********************"
         name =alist.strip()
-        print name
+        #print name
         #print model_user.dictionary_of_lists[alist]
         del dict_of_bucket_list[name]
         return redirect(url_for('bucket_list'))
@@ -166,9 +166,9 @@ def edit_item_in_bucket():
         list_to_edit = dict_of_bucket_list[key_of_dict]
         list_to_edit.remove(item_to_delete)
         list_to_edit.append(item_to_add)
-        print item_to_add
-        print item_to_delete
-        print "_______________"
+        #print item_to_add
+        #print item_to_delete
+        #print "_______________"
        
         return redirect(url_for('bucket_list'))
     
