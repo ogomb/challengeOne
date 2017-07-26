@@ -34,7 +34,13 @@ class BucketListApplication(unittest.TestCase):
         client = app.test_client()
         response = client.post('bucket_list', data={"description":["go hiking in everest"]})
         self.assertNotEqual('go hiking in everest', response.get_data(as_text=True))
-    
+
+
+    def test_logout_works(self):
+        """
+        Test if the page logout works."""
+        client = app.test_client()
+        return client.get('/logout', follow_redirects=True)    
 if __name__== "__main__":
     unittest.main()
 
