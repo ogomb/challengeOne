@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/ogomb/challengeOne.svg?branch=master)](https://travis-ci.org/ogomb/challengeOne)
+
 SYNOPSIS
 
 This is a web application project; a bucketlist where users add the things they would like to do
