@@ -37,14 +37,7 @@ class BucketListApplication(unittest.TestCase):
         response = client.post('/login', data={'email':"some weird email here"})
         self.assertEqual(response.status, '200 OK')
 
-    def test_bucketlist_page_bucketlist(self):
-        """
-        Test if the correct post is sent."""
-        client = app.test_client()
-        response = client.post('/bucket_list', data={"description":"go hiking in everest"})
-        self.assertNotEqual('go hiking in everest', response.get_data(as_text=True))
-
-
+   
     def test_logout_works(self):
         """
         Test if the page logout works."""
