@@ -86,19 +86,15 @@ def bucket_list():
     if request.method == 'POST' and session['username'] != None:
         description = str(request.form.get('description'))
         description.strip()
-        print description
+        
         model_user.description = description
         if description not in dict_of_bucket_list.keys():
             dict_of_bucket_list[description] = BucketList().display_list()
-            #buckets = dict_of_bucket_list.keys()
             return redirect(url_for('bucket_list'))
     username = model_user.name
-    #bucket_list_items = dict_of_bucket_list.keys()
+    
     bucket_list_items2 = dict_of_bucket_list
     dictionary = dict_of_bucket_list
-    print bucket_list_items2
-    print model_user.description
-    print dictionary
     return render_template('my_bucket.html', username=username, description=model_user.description,\
  bucket_list_items2=bucket_list_items2, things_to_do=bucket_list_items2)
 
@@ -122,8 +118,6 @@ def delete_whole_bucket_list():
     if request.method == 'POST':
         alist = str(request.form.get('bucket_name'))
         name = alist.strip()
-        print name
-        #print model_user.dictionary_of_lists[alist]
         del dict_of_bucket_list[name]
         return redirect(url_for('bucket_list'))
 
