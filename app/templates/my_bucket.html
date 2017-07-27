@@ -73,11 +73,35 @@
                                     
                                       
                                     <div class="btn-group pull-right">
-                                        <a href="#my_modal" data-toggle="modal" data-book-id="{{ big_stuff }}">Add Item</a>
+                                        <a href="#edit_bucket_modal" data-toggle="modal" data-edit-bucket="{{ big_stuff }}"class="btn btn-primary" style="float: left">Edit BucketList</a>
+
+
+                                        <div class="modal" id="edit_bucket_modal">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <h4 class="modal-title">Edit the bucket</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                               <form action="/bucket_list/edit_bucketlist" method="POST"> 
+                                                                        <input type="text" required class="form-control" name="bucket-name" placeholder="Enter new name of bucket">
+                                                                        <input type="hidden" name="bucketName">                                              
+                                                                        <input class="btn btn-default" type="submit"/></form>
+                                            </div>
+                                                 <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        
+
+                                        <a href="#my_modal" data-toggle="modal" data-book-id="{{ big_stuff }}" class="btn btn-primary" style="float: right">Add Item</a>
                                      
                                         <form action="/bucket_list/delete_all" method="POST">
                                         <input type="hidden" name="bucket_name" value=" {{ big_stuff }}"/>
-                                        <input type="submit" value="Delete"/>
+                                        <input type="submit" class="btn btn-danger" style="float: left"  value="Delete BucketList"/>
                                         </form>
 
                                      <div class="modal" id="my_modal">
@@ -188,6 +212,12 @@
     var dictname = $(e.relatedTarget).data('dict-name')
     $(e.currentTarget).find('input[name="item"]').val(item);
     $(e.currentTarget).find('input[name="dict_name"]').val(dictname);
+ });
+
+  $('#edit_bucket_modal').on('show.bs.modal', function(e) {
+    var item = $(e.relatedTarget).data('edit-bucket');
+    $(e.currentTarget).find('input[name="bucketName"]').val(item);
+    
  });
 </script>   
     
