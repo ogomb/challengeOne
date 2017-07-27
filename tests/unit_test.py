@@ -51,15 +51,7 @@ class BucketListApplication(unittest.TestCase):
         client = app.test_client()
         return client.get('/logout', follow_redirects=True)
     
-    def test_redirection_after_edit(self):
-        """
-        this function tests if the post will redirect
-        to another page after a post  is made. """
-        self.my_dict["name"]=[]
-        client = app.test_client()
-        response = client.post('/bucket_list/delete_all', data={"bucket_name":"name"})
-        self.assertEqual(response.status, '302 FOUND')
-
+    
     def test_bucketlist_empty_after_removingall(self):
         """
         Test that the bucket list contains nothing after
