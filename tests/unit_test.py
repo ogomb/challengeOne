@@ -27,7 +27,7 @@ class BucketListApplication(unittest.TestCase):
         another page after a post request is made. """
         client = app.test_client()
         response = client.post('/signup', data={1: "just random stuff"})
-        self.assertEqual(response.status, '302 FOUND')
+        self.assertEqual(response.status, '200 OK')
 
     def test_login_page_redirection(self):
         """
@@ -35,7 +35,7 @@ class BucketListApplication(unittest.TestCase):
         to another page after a post request is made. """
         client = app.test_client()
         response = client.post('/login', data={'email':"some weird email here"})
-        self.assertEqual(response.status, '302 FOUND')
+        self.assertEqual(response.status, '200 OK')
 
     def test_bucketlist_page_bucketlist(self):
         """
