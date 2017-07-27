@@ -41,7 +41,7 @@ class BucketListApplication(unittest.TestCase):
         """
         Test if the correct post is sent."""
         client = app.test_client()
-        response = client.post('bucket_list', data={"description":"go hiking in everest"})
+        response = client.post('/bucket_list', data={"description":"go hiking in everest"})
         self.assertNotEqual('go hiking in everest', response.get_data(as_text=True))
 
 
