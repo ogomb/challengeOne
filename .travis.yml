@@ -10,6 +10,9 @@ install:
  
   - pip install -r requirements.txt
 # command to run tests
-script: nosetests tests/
+script: 
+  - nosetests tests/
+  - coverage run --source=. coverage report
+  - coveralls
 after_success: coveralls
 
