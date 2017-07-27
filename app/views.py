@@ -1,5 +1,5 @@
-from flask import render_template, request, redirect, url_for
-
+from flask import render_template, request, redirect, url_for, session
+from myForms import SignUpForm, LoginForm
 
 from app import app
 
@@ -47,42 +47,46 @@ def index():
     return render_template('home.html')
 
 
-
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     """
     Renders the signup page."""
-    if request.method == 'POST':
-        username = str(request.form.get('inputName'))
-        email = str(request.form.get('inputEmail'))
-        password = str(request.form.get('inputPassword'))
-        if username:
-            model_user.name = username
-            model_user.email = email
-            model_user.password = password
-            return redirect(url_for('login'))
-    return render_template('signup.html')
+    form = SignUpForm()
+
+    if form.validate_on_submit():
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+        model_user.name = username
+        model_user.email = email
+        model_user.password = password
+        session["username"]= model_user.name
+        return redirect(url_for('bucket_list'))
+    return render_template('signup.html', form=form)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     """
     Renders the login page."""
-    if request.method == 'POST':
-        email = str(request.form.get('inputEmail'))
-        password = str(request.form.get('inputPassword'))
+    form = LoginForm()    
+    if form.validate_on_submit():
+        email = form.email.data
+        password = form.password.data
         if email == model_user.email and password == model_user.password:
             return redirect(url_for('bucket_list'))
         else:
-            return redirect(url_for('signup'))
-    return render_template('login.html')
+            msg = "wrong credentials"
+            return redirect(url_for('signup', data = msg))
+    return render_template('login.html',form=form)
 
 @app.route('/bucket_list', methods=['GET', 'POST'])
 def bucket_list():
     """
     Renders the bucket list page of the app."""
-    if request.method == 'POST':
+    if request.method == 'POST' and session['username'] != None:
         description = str(request.form.get('description'))
         description.strip()
+        print description
         model_user.description = description
         if description not in dict_of_bucket_list.keys():
             dict_of_bucket_list[description] = BucketList().display_list()
@@ -91,7 +95,10 @@ def bucket_list():
     username = model_user.name
     #bucket_list_items = dict_of_bucket_list.keys()
     bucket_list_items2 = dict_of_bucket_list
-    #dictionary = dict_of_bucket_list
+    dictionary = dict_of_bucket_list
+    print bucket_list_items2
+    print model_user.description
+    print dictionary
     return render_template('my_bucket.html', username=username, description=model_user.description,\
  bucket_list_items2=bucket_list_items2, things_to_do=bucket_list_items2)
 
@@ -115,6 +122,7 @@ def delete_whole_bucket_list():
     if request.method == 'POST':
         alist = str(request.form.get('bucket_name'))
         name = alist.strip()
+        print name
         #print model_user.dictionary_of_lists[alist]
         del dict_of_bucket_list[name]
         return redirect(url_for('bucket_list'))
@@ -151,4 +159,12 @@ def edit_bucketlist():
         old_bucketName = request.form.get("bucketName")
         dict_of_bucket_list[new_bucketName] = dict_of_bucket_list.pop(old_bucketName)
         return redirect(url_for('bucket_list'))
+
+@app.route('/logout')
+def log_out():
+    """
+    Logs out the user out of system. """
+    session.pop("username",None)
+    dict_of_bucket_list.clear()
+    return render_template("home.html")
     
