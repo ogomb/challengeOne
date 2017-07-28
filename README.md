@@ -11,15 +11,11 @@ THE PROJECT
 
 The project is built using Flask framework and python programming language.
 
-Application explained:
-
-User sign up to the application
-User is redirected to sign in after sign up
-User creates a bucket list from a category and the bucket list item
-User views the bucket list.
 
 
-How to install the application
+
+HOW TO INSTALL THE APPLICATION
+
 		-
 You need to clone the repo `https://github.com/ogomb/challengeOne.git`.
 
@@ -32,6 +28,7 @@ install dependencies `pip install -r requirements.txt`
 While the virtual environment is activated run `python run.py`
 
 FEATURES
+
 A user can signup to the application
 
 Registered users are able to Login to the system.
