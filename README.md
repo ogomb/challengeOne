@@ -31,6 +31,13 @@ install dependencies `pip install -r requirements.txt`
 
 While the virtual environment is activated run `python run.py`
 
+FEATURES
+A user can signup to the application
+
+Registered users are able to Login to the system.
+
+User can create update and delete a bucketlist
+
 
 
 
