@@ -20,7 +20,7 @@ py==1.4.34
 pylint==1.7.2
 pytest-splinter==1.8.5
 python-coveralls==2.9.1
-PyYAML==3.12
+PyYAML==5.4
 requests==2.18.2
 singledispatch==3.4.0.3
 six==1.10.0
