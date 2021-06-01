@@ -25,7 +25,7 @@ requests==2.18.2
 singledispatch==3.4.0.3
 six==1.10.0
 splinter==0.7.5
-urllib3==1.22
+urllib3==1.26.5
 Werkzeug==0.12.2
 wrapt==1.10.10
 WTForms==2.1
